@@ -1,8 +1,13 @@
 // import 'package:flutter_test/flutter_test.dart'
 import 'package:flutter/material.dart';
+import 'package:intro_app/firstPage.dart';
+import 'package:intro_app/secondPage.dart';
 
 void main() => runApp(MaterialApp(
       home: HomePage(),
+      theme: ThemeData(
+        primarySwatch: Colors.teal,
+      ),
     ));
 
 class HomePage extends StatefulWidget {
@@ -12,82 +17,53 @@ class HomePage extends StatefulWidget {
   _HomePageState createState() => _HomePageState();
 }
 
-class _HomePageState extends State<HomePage> {
+class _HomePageState extends State<HomePage>
+    with SingleTickerProviderStateMixin {
+  TabController? controller;
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    controller = TabController(vsync: this, length: 2);
+  }
+
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    controller!.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Center(
-          child: Text('intro to flutter'),
+        title: Text('Working with Tab'),
+        backgroundColor: Colors.teal,
+        // bottom:
+      ),
+      bottomNavigationBar: Material(
+        color: Colors.teal,
+        child: TabBar(
+          controller: controller,
+          tabs: [
+            Tab(
+              icon: Icon(Icons.access_alarm),
+            ),
+            Tab(
+              icon: Icon(Icons.access_time),
+            )
+          ],
         ),
       ),
-      body: _MyList(),
-    );
-  }
-}
-
-class _MyList extends StatelessWidget {
-  const _MyList({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return ListView.builder(
-      padding: const EdgeInsets.all(4.0),
-      itemCount: 5,
-      itemBuilder: (context, i) {
-        return ListTile(
-          title: Text('Title about list builder'),
-          subtitle: Text(
-            'I am subtitle',
-            style: TextStyle(fontStyle: FontStyle.italic, color: Colors.amber),
-          ),
-          leading: Icon(Icons.face),
-          trailing: ElevatedButton(
-            child: Text('remove'),
-            onPressed: () {
-              deleteDialog(context).then((value) {
-                print('$value');
-              });
-            },
-          ),
-        );
-      },
-    );
-  }
-}
-
-Future<bool> deleteDialog(BuildContext context) async {
-  return await showDialog(
-    context: context,
-    barrierDismissible: false,
-    builder: (BuildContext context) {
-      return AlertDialog(
-        title: Text('Will deleted'),
-        actions: [
-          TextButton(
-            onPressed: () {
-              Navigator.of(context).pop(true);
-            },
-            child: Text('yes'),
-          ),
-          TextButton(
-              onPressed: () {
-                Navigator.of(context).pop(false);
-              },
-              child: Text('No'))
+      body: TabBarView(
+        controller: controller,
+        children: [
+          FirstPage(),
+          SecondPage(),
         ],
-      );
-    },
-  );
+      ),
+    );
+  }
 }
-
-
-
-// Hlw world body
-//  body: Center(
-//           child: Text(
-//             'Yo i wrote something',
-//             style: TextStyle(
-//                 fontSize: 24.0, color: Colors.red, fontFamily: 'BigShoulder'),
-//           ),
-//         ),
