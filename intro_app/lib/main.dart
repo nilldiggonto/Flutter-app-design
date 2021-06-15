@@ -51,10 +51,10 @@ class _HomePageState extends State<HomePage> {
               },
             ),
             ExpansionPanelList(
-              expansionCallback: (i, val) {
+              expansionCallback: (i, bool val) {
                 setState(() {
                   // enabled
-                  expanded = val;
+                  expanded = !val;
                 });
               },
               children: [
@@ -63,13 +63,16 @@ class _HomePageState extends State<HomePage> {
                     padding: EdgeInsets.all(20.0),
                     child: Text('yo'),
                   ),
-                  headerBuilder: (context,val){
+                  headerBuilder: (context, bool val) {
                     return Center(
-                      child:  Text('Tap here',style: TextStyle(fontSize: 18.0),),
-                      
-                    )
-                  }
-                )
+                      child: Text(
+                        'Tap here',
+                        style: TextStyle(fontSize: 18.0),
+                      ),
+                    );
+                  },
+                  isExpanded: expanded,
+                ),
               ],
             )
           ],
