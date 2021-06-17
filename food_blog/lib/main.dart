@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:food_blog/pages/starterPage.dart';
 
-void mian() {
+void main() {
   runApp(MaterialApp(
-    home: '',
+    debugShowCheckedModeBanner: false,
+    theme: ThemeData(fontFamily: 'BigShoulder'),
+    home: StarterPage(),
   ));
 }
