@@ -16,8 +16,8 @@ class NoteService {
         final notes = <NoteForListing>[];
         for (var item in jsonData) {
           final note = NoteForListing(
-            noteID: item['noteID'],
-          );
+              // noteID: item['noteID'],
+              );
         }
       }
     });
