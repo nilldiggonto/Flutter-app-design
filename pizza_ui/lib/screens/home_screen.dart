@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:pizza_ui/widgets/destination_carousel.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -75,6 +76,11 @@ class _HomeScreenState extends State<HomeScreen> {
                   )
                   .toList(),
             ),
+            SizedBox(
+              height: 20.0,
+            ),
+            DestinationCarousel(),
+            // DestinationCarousel(),
           ],
         ),
       ),
